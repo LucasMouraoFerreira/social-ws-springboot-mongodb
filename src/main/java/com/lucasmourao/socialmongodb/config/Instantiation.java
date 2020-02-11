@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.lucasmourao.socialmongodb.domain.Post;
 import com.lucasmourao.socialmongodb.domain.User;
+import com.lucasmourao.socialmongodb.dto.AuthorDTO;
 import com.lucasmourao.socialmongodb.repositories.PostRepository;
 import com.lucasmourao.socialmongodb.repositories.UserRepository;
 
@@ -35,10 +36,12 @@ public class Instantiation implements CommandLineRunner{
 		User alex = new User(null, "Alex Green", "alex@gmail.com");
 		User bob = new User(null, "Bob Grey", "bob@gmail.com");		
 	
-		Post post1 = new Post(null, sdf.parse("21/03/2018"),"Partiu viagem!","Vou viajar pessoal!!",maria);
+		repository.saveAll(Arrays.asList(maria,alex,bob));
+		
+		Post post1 = new Post(null, sdf.parse("21/03/2018"),"Partiu viagem!","Vou viajar pessoal!!",new AuthorDTO(maria));
 		
 		postRepository.save(post1);
-		repository.saveAll(Arrays.asList(maria,alex,bob));
+		
 	}
 
 }
